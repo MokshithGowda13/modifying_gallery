@@ -1,10 +1,20 @@
+
+<?php
+session_start();
+if((isset($_SESSION['customer_id'])))
+{
+    header('Location:login.php');
+}
+include './includes/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign in</title>
+    <title>Modifying Gallery</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="./login/fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -26,22 +36,65 @@
 
                     <div class="signin-form">
                         <h2 class="form-title">Sign in</h2>
-                        <form method="POST" class="register-form" id="login-form">
+                        <form method="POST" class="register-form" onsubmit="return validateForm()">
                             <div class="form-group">
-                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="username" onclick="clearusernamevalidation()" placeholder="Your Name"/>
                             </div>
                             <div class="form-group">
-                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" onclick="clearpasswordvalidation()" placeholder="Password"/>
                             </div>
                             <div class="form-group">
                                 <a href="#">Forgot Password?</a>
                             </div>
                             <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                <button class="form-submit" style="border:none" type="submit" name="submit">Log in</button>
                             </div>
                         </form>
+                        <?php
+                            if(isset($_POST['submit']))
+                            {
+                                $username=mysqli_real_escape_string($con,$_POST['username']);
+                                $password=mysqli_real_escape_string($con,$_POST['password']);
+
+                                $sql="SELECT * FROM customer WHERE customer_username='$username' AND customer_password='$password'";
+                                $query=mysqli_query($con,$sql) or die(mysqli_error($con));
+                                if(mysqli_num_rows($query))
+                                {
+                                    $fetch=mysqli_fetch_array($query);
+                                    $_SESSION['customer_id']=$fetch['customer_id'];
+                                    $_SESSION['customer_email']=$fetch['customer_email'];
+                                    ?>
+                                        <script>
+                                            Swal.fire(
+                                            {
+                                                icon: 'success',
+                                                title: 'Success!',
+                                                text: 'You successfully Logged in'
+                                            }).then((result) => {
+                                                window.location='./customer/home.php';
+                                            });
+                                        </script>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                    <script>
+                                        Swal.fire(
+                                        {
+                                            icon: 'warning',
+                                            title: 'Oops!',
+                                            text: 'Something went wrong!!'
+                                        }).then((result) => {
+                                            window.location='login.php';
+                                        });
+                                    </script>
+                                    <?php
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
