@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="./login/css/style.css">
 </head>
 <body>
-
     <div class="main">
 
         <!-- Sign up form -->
