@@ -52,8 +52,8 @@
                             </div>
                         </form>
                     </div>
-                    <div class="signup-image">
-                        <figure><img src="./login/images/signup-image.jpg" alt="sing up image"></figure>
+                    <div class="signup-image" style="margin-">
+                        <figure><img src="./login/images/register.jpeg" alt="sing up image"></figure>
                         <a href="./login.php" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
