@@ -3,7 +3,7 @@
 session_start();
 if((isset($_SESSION['customer_id'])))
 {
-    header('Location:login.php');
+    header('Location:./customer/home.php');
 }
 include './includes/connection.php';
 ?>
@@ -21,6 +21,10 @@ include './includes/connection.php';
 
     <!-- Main css -->
     <link rel="stylesheet" href="./login/css/style.css">
+
+    <script src="./js/sweetalert/jquery-3.4.1.min.js"></script>
+    <script src="./js/sweetalert/sweetalert2.all.min.js"></script>
+
 </head>
 <body>
 
@@ -39,11 +43,13 @@ include './includes/connection.php';
                         <form method="POST" class="register-form" onsubmit="return validateForm()">
                             <div class="form-group">
                                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="username" id="username" onclick="clearusernamevalidation()" placeholder="Your Name"/>
+                                <input type="text" name="username" id="username" onclick="clearusernamevalidation()" placeholder="Username" required/>
+                                <span id="validateusername" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="password" onclick="clearpasswordvalidation()" placeholder="Password"/>
+                                <input type="password" name="password" id="password" onclick="clearpasswordvalidation()" placeholder="Password" required/>
+                                <span id="validatepassword" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <a href="#">Forgot Password?</a>
@@ -65,6 +71,7 @@ include './includes/connection.php';
                                     $fetch=mysqli_fetch_array($query);
                                     $_SESSION['customer_id']=$fetch['customer_id'];
                                     $_SESSION['customer_email']=$fetch['customer_email'];
+                                    $_SESSION['customer_name']=$fetch['customer_name'];
                                     ?>
                                         <script>
                                             Swal.fire(
@@ -105,5 +112,8 @@ include './includes/connection.php';
     <!-- JS -->
     <script src="./login/vendor/jquery/jquery.min.js"></script>
     <script src="./login/js/main.js"></script>
+
+    <!-- <script src="./js/validations/login.js"></script> -->
+
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

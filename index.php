@@ -1,3 +1,13 @@
+
+<?php
+session_start();
+// if(!(isset($_SESSION['customer_id'])))
+// {
+//     header('Location:login.php');
+// }
+include './includes/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,7 +74,6 @@
                                 <div class="col-10 col-lg-7 text-center text-lg-start">
                                     <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing //</h6>
                                     <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Repair Service Center</h1>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
                                     <img class="img-fluid" src="img/carousel-1.png" alt="">
@@ -81,7 +90,6 @@
                                 <div class="col-10 col-lg-7 text-center text-lg-start">
                                     <h6 class="text-white text-uppercase mb-3 animated slideInDown">// Car Servicing //</h6>
                                     <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">Qualified Car Wash Service Center</h1>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Learn More<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                                 <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
                                     <img class="img-fluid" src="img/carousel-2.png" alt="">
@@ -116,7 +124,6 @@
                         <div class="ps-4">
                             <h5 class="mb-3">Quality Servicing</h5>
                             <p>Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +133,6 @@
                         <div class="ps-4">
                             <h5 class="mb-3">Expert Workers</h5>
                             <p>Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -136,7 +142,6 @@
                         <div class="ps-4">
                             <h5 class="mb-3">Modern Equipment</h5>
                             <p>Diam dolor diam ipsum sit amet diam et eos erat ipsum</p>
-                            <a class="text-secondary border-bottom" href="">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -198,7 +203,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="" class="btn btn-primary py-3 px-5">Read More<i class="fa fa-arrow-right ms-3"></i></a>
+                    <a href="./about.php" class="btn btn-primary py-3 px-5">Read More<i class="fa fa-arrow-right ms-3"></i></a>
                 </div>
             </div>
         </div>
@@ -280,7 +285,7 @@
                                     <p><i class="fa fa-check text-success me-3"></i>Quality Servicing</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Expert Workers</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Modern Equipment</p>
-                                    <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
+                                    <a href="./service.php" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -298,7 +303,7 @@
                                     <p><i class="fa fa-check text-success me-3"></i>Quality Servicing</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Expert Workers</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Modern Equipment</p>
-                                    <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
+                                    <a href="./service.php" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -316,7 +321,7 @@
                                     <p><i class="fa fa-check text-success me-3"></i>Quality Servicing</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Expert Workers</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Modern Equipment</p>
-                                    <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
+                                    <a href="./service.php" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -334,7 +339,7 @@
                                     <p><i class="fa fa-check text-success me-3"></i>Quality Servicing</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Expert Workers</p>
                                     <p><i class="fa fa-check text-success me-3"></i>Modern Equipment</p>
-                                    <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
+                                    <a href="./service.php" class="btn btn-primary py-3 px-5 mt-3">Read More<i class="fa fa-arrow-right ms-3"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -347,54 +352,7 @@
 
 
     <!-- Booking Start -->
-    <div class="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="row gx-5">
-                <div class="col-lg-6 py-5">
-                    <div class="py-5">
-                        <h1 class="text-white mb-4">Certified and Award Winning Car Repair Service Provider</h1>
-                        <p class="text-white mb-0">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
-                        <h1 class="text-white mb-4">Book For A Service</h1>
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 2</option>
-                                        <option value="3">Service 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control border-0 datetimepicker-input"
-                                            placeholder="Service Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Special Request"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-secondary w-100 py-3" type="submit">Book Now</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Booking End -->
 
 
@@ -477,48 +435,7 @@
 
 
     <!-- Testimonial Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="text-center">
-                <h6 class="text-primary text-uppercase">// Testimonial //</h6>
-                <h1 class="mb-5">Our Clients Say!</h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel position-relative">
-                <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include('./includes/testimonial.php'); ?>
     <!-- Testimonial End -->
 
 

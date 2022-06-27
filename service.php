@@ -40,6 +40,10 @@ include './includes/connection.php';
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <script src="./js/sweetalert/jquery-3.4.1.min.js"></script>
+    <script src="./js/sweetalert/sweetalert2.all.min.js"></script>
+
 </head>
 
 <body>
@@ -68,8 +72,7 @@ include './includes/connection.php';
                 <h1 class="display-3 text-white mb-3 animated slideInDown">Services</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center text-uppercase">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item"><a href="home.php">Home</a></li>
                         <li class="breadcrumb-item text-white active" aria-current="page">Services</li>
                     </ol>
                 </nav>
@@ -198,43 +201,114 @@ include './includes/connection.php';
                 <div class="col-lg-6">
                     <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Book For A Service</h1>
-                        <form>
+                        <form onsubmit="return validateForm()" method="POST">
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
+                                    <input type="text" id="name" name="name" required class="form-control border-0" value="<?php echo $_SESSION['customer_name']; ?>" placeholder="Your Name" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
+                                    <input type="email" id="email" name="email" required class="form-control border-0" value="<?php echo $_SESSION['customer_email']; ?>" placeholder="Your Email" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 2</option>
-                                        <option value="3">Service 3</option>
+                                    <select class="form-select border-0" onclick="clearservicevalidation()" id="service" required name="service" style="height: 55px;">
+                                        <option value="Null">Select Service Type</option>
+                                        <option value="Towing">Towing</option>
+                                        <option value="Car wash">Car wash</option>
+                                        <option value="Oil change">Oil change</option>
+                                        <option value="Car parts service">Car parts service</option>
+                                        <option value="Magwheel">Magwheel</option>
+                                        <option value="Car wrapping">Car wrapping</option>
+                                        <option value="Cermic coating">Cermic coating</option>
+                                        <option value="Rubbing">Rubbing</option>
                                     </select>
+                                    <span id="validatetype" class="text-white"></span>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control border-0 datetimepicker-input"
-                                            placeholder="Service Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
-                                    </div>
+                                    <input type="date" onclick="cleardatevalidation()"
+                                    class="form-control border-0 datetimepicker-input"
+                                    placeholder="Service Date" required name="date" id="date" style="height: 55px;">
+                                    <span id="validatedate" class=""></span>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Special Request"></textarea>
+                                    <textarea class="form-control border-0" name="request" id="request" placeholder="Special Request"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-secondary w-100 py-3" type="submit">Book Now</button>
+                                    <button class="btn btn-secondary w-100 py-3" type="submit" name="submit">Book Now</button>
                                 </div>
                             </div>
                         </form>
+                        <?php
+                            if(isset($_POST['submit']))
+                            {
+                                $id=$_SESSION['customer_id'];
+                                $service=mysqli_real_escape_string($con,$_POST['service']);
+                                $date=mysqli_real_escape_string($con,$_POST['date']);
+                                $request=mysqli_real_escape_string($con,$_POST['request']);
+
+                                $sql="INSERT INTO service_booking (customer_id,service_type,date,
+                                status,request)
+                                VALUES ('$id','$service','$date','BOOKING CONFIRMED','$request')";
+
+                                $insert=mysqli_query($con,$sql);
+
+                                if($insert)
+                                {
+                                    ?>
+                                        <script>
+                                            Swal.fire(
+                                            {
+                                                icon: 'success',
+                                                title: 'Success!',
+                                                text: 'Booking Confirmed'
+                                            }).then((result) => {
+                                                window.location='./customer/view-bookings.php';
+                                            });
+                                        </script>
+                                    <?php
+                                }
+                                else
+                                {
+                                    ?>
+                                        <script>
+                                            Swal.fire(
+                                            {
+                                                icon: 'warning',
+                                                title: 'Oops!',
+                                                text: 'Something went wrong!!'
+                                            }).then((result) => {
+                                                window.location='service.php';
+                                            });
+                                        </script>
+                                    <?php
+                                }
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Booking End -->
+
+    <!-- Call To Action Start -->
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-8 col-md-6">
+                    <h6 class="text-primary text-uppercase">// Call To Action //</h6>
+                    <h1 class="mb-4">Have Any Pre Booking Question?</h1>
+                    <p class="mb-0">Lorem diam ea sit dolor labore. Clita et dolor erat sed est lorem sed et sit. Diam sed duo magna erat et stet clita ea magna ea sed, sit labore magna lorem tempor justo rebum dolores. Eos dolor sea erat amet et, lorem labore lorem at dolores. Stet ea ut justo et, clita et et ipsum diam.</p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="bg-primary d-flex flex-column justify-content-center text-center h-100 p-4">
+                        <h3 class="text-white mb-4"><i class="fa fa-phone-alt me-3"></i>+012 345 6789</h3>
+                        <a href="" class="btn btn-secondary py-3 px-5">Contact Us<i class="fa fa-arrow-right ms-3"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Call To Action End -->
 
 
     <!-- Testimonial Start -->
@@ -265,6 +339,9 @@ include './includes/connection.php';
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script src="./js/validations/service.js"></script>
+
 </body>
 
 </html>
