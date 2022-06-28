@@ -12,7 +12,30 @@
             <a href="service.php" class="nav-item nav-link">Services</a>
             <a href="items.php" class="nav-item nav-link">Items</a>
             <a href="contact.php" class="nav-item nav-link">Contact</a>
+            <?php
+                if(isset($_SESSION['customer_id']))
+                {
+                    ?>
+                        <a href="cart.php" class="nav-item nav-link">Cart</a>
+                        <a href="favourites.php" class="nav-item nav-link">Favourites</a>
+                    <?php
+                }
+            ?>
         </div>
-        <a href="login.php" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a>
+        <?php
+            if(isset($_SESSION['customer_id']))
+            {
+                ?>
+                    <a href="./customer/home.php" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">My Account<i class="fa fa-arrow-right ms-3"></i></a>
+                <?php
+            }
+            else
+            {
+                ?>
+                    <a href="login.php" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Login<i class="fa fa-arrow-right ms-3"></i></a>
+                <?php
+            }
+        ?>
+        
     </div>
 </nav>

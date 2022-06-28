@@ -62,7 +62,7 @@ include './includes/connection.php';
     <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-bg-2.jpg);">
         <div class="container-fluid page-header-inner py-5">
             <div class="container text-center">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">Technicians</h1>
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Car Items</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center text-uppercase">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -90,15 +90,17 @@ include './includes/connection.php';
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/team-1.jpg" alt="">
-                            <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
-                                <a class="btn btn-square mx-5 px-5" href="">Add to carts</a>
-                                <a class="btn btn-square mx-5 px-5" href="">Add to favourites</a>
-                            </div>
+                            <img class="img-fluid" src="<?php echo str_replace("../","./",$row['image_loc']); ?>" alt="">
+                            <!-- <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-cart-shopping"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-heart"></i></a>
+                            </div> -->
                         </div>
                         <div class="bg-light text-center p-4">
-                            <h5 class="fw-bold mb-0">Full Name</h5>
-                            <small>Designation</small>
+                            <h5 class="fw-bold mb-0"><?php echo $row['item_name']; ?></h5>
+                            <small>&#8377;<?php echo $row['item_cost']; ?>.00</small><br><br>
+                            <a href="./includes/add-cart.php?item_id=<?php echo $row['item_id']; ?>" class="btn btn-primary">Cart</a>
+                            <a href="./includes/add-favourites.php?item_id=<?php echo $row['item_id']; ?>" class="btn btn-primary">Favourites</a>
                         </div>
                     </div>
                 </div>
